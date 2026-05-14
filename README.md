@@ -2,6 +2,8 @@
 
 `pinj` is a tiny prompt-injection smoke-test tool for LLM and agent HTTP endpoints.
 
+Current version: `0.1.0`
+
 It sends a small set of hostile prompts to a target endpoint, stores the raw responses, and flags obvious suspicious behavior.
 
 `pinj` is intentionally simple.
@@ -27,6 +29,12 @@ LLM and agent applications often expose new failure modes:
 Before trusting an AI endpoint, run basic hostile prompts against it.
 
 Failing these tests is a strong warning sign.
+
+---
+
+## pinj and promptfoo
+
+[promptfoo](https://github.com/promptfoo/promptfoo) is more comprehensive and the right fit for full evaluation pipelines. `pinj` is a curl-based smoke test for CI without Node or Python dependencies.
 
 ---
 
@@ -69,7 +77,9 @@ That sends:
 pinj/
   README.md
   AGENTS.md
+  LICENSE
   PLAN.md
+  VERSION
   attacks/
   config.example.env
   docs/
