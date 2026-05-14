@@ -4,7 +4,7 @@ Guidance for AI coding agents working on `pinj`.
 
 ## Project
 
-`pinj` is a small Unix-style CLI tool for running prompt-injection smoke tests against LLM or agent HTTP endpoints.
+`pinj` is a small Unix-style CLI tool for running prompt-injection baseline security checks against LLM or agent HTTP endpoints.
 
 The first version is intentionally simple:
 
@@ -22,7 +22,7 @@ The first version is intentionally simple:
 - Prefer readable code over clever code.
 - Do not build a framework too early.
 - Every test should be understandable by a QA/security engineer.
-- False positives are acceptable for smoke tests.
+- False positives are acceptable for baseline security checks.
 - False confidence is not acceptable.
 
 ## Language Choices

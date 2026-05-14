@@ -2,7 +2,7 @@
 
 ![pinj banner](pinj-banner.png)
 
-`pinj` is a tiny prompt-injection smoke-test tool for LLM and agent HTTP endpoints.
+`pinj` is a tiny prompt-injection baseline security check for LLM and agent HTTP endpoints.
 
 Current version: `0.1.0`
 
@@ -36,7 +36,7 @@ Failing these tests is a strong warning sign.
 
 ## pinj and promptfoo
 
-[promptfoo](https://github.com/promptfoo/promptfoo) is more comprehensive and the right fit for full evaluation pipelines. `pinj` is a curl-based smoke test for CI without Node or Python dependencies.
+[promptfoo](https://github.com/promptfoo/promptfoo) is more comprehensive and the right fit for full evaluation pipelines. `pinj` is a curl-based baseline check for CI without Node or Python dependencies.
 
 ---
 
@@ -287,7 +287,7 @@ It may produce false positives.
 
 It may miss real vulnerabilities.
 
-It is a smoke test, not a full security assessment.
+It is a baseline security check, not a full security assessment.
 
 ---
 
@@ -312,3 +312,9 @@ The initial corpus includes basic checks for:
 - multimodal hidden instructions
 - jailbreak roleplay
 - format bypass
+
+---
+
+## License
+
+MIT License. Copyright (c) 2026 Toni Gansel.

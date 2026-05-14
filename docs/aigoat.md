@@ -156,6 +156,6 @@ PINJ_REQUEST_TEMPLATE_FILE=examples/aigoat-chat.template.json \
 
 ## Notes
 
-- `pinj` is a smoke-test tool. It uses keyword matching and can produce false positives.
+- `pinj` is a baseline security check. It uses keyword matching and can produce false positives.
 - AI Goat may leak useful details without marking its own workshop challenge as complete.
 - `results/` is ignored by git because raw responses may contain sensitive data.

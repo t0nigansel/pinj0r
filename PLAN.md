@@ -4,13 +4,13 @@ Development plan for `pinj`.
 
 ## Goal
 
-Build a minimal prompt-injection smoke-test tool for LLM and agent endpoints.
+Build a minimal prompt-injection baseline security check for LLM and agent endpoints.
 
 `pinj` should help answer one simple question:
 
 > Does this endpoint fail obvious prompt-injection checks?
 
-It is not a full security scanner. It is a smoke test.
+It is not a full security scanner. It is a baseline security check.
 
 ---
 
