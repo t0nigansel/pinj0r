@@ -1,5 +1,7 @@
 # pinj
 
+![pinj banner](pinj-banner.png)
+
 `pinj` is a tiny prompt-injection smoke-test tool for LLM and agent HTTP endpoints.
 
 Current version: `0.1.0`
