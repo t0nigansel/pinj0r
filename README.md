@@ -32,7 +32,7 @@ Failing these tests is a strong warning sign.
 
 ## Current Scope
 
-`pinj` v0.1 assumes:
+`pinj` assumes:
 
 - HTTP POST endpoint
 - JSON request body
@@ -72,17 +72,18 @@ pinj/
   PLAN.md
   attacks/
   config.example.env
+  docs/
+  examples/
   patterns.txt
   request.template.example.json
   run.sh
+  tests/
   results/
 ```
 
 ---
 
-## Setup
-
-Copy the example config:
+## Quick Start
 
 ```sh
 cp config.example.env .env
@@ -91,22 +92,17 @@ cp config.example.env .env
 Edit `.env`:
 
 ```sh
-PINJ_TARGET_URL="https://example.com/chat"
-PINJ_BEARER_TOKEN="replace-me"
-PINJ_ATTACKS_DIR="attacks"
-PINJ_JSON_FIELD="message"
-PINJ_PATTERNS_FILE="patterns.txt"
+export PINJ_TARGET_URL="https://example.com/chat"
+export PINJ_BEARER_TOKEN="replace-me"
+export PINJ_ATTACKS_DIR="attacks"
+export PINJ_JSON_FIELD="message"
+export PINJ_PATTERNS_FILE="patterns.txt"
 ```
 
-Load it:
+Then run:
 
 ```sh
 . ./.env
-```
-
-Run:
-
-```sh
 ./run.sh
 ```
 
@@ -124,36 +120,6 @@ docs/aigoat.md
 
 ---
 
-## Quick Start
-
-```sh
-cp config.example.env .env
-```
-
-Edit `.env`:
-
-```sh
-export PINJ_TARGET_URL="https://example.com/chat"
-export PINJ_BEARER_TOKEN="replace-me"
-export PINJ_ATTACKS_DIR="attacks"
-export PINJ_PATTERNS_FILE="patterns.txt"
-```
-
-Then run:
-
-```sh
-. ./.env
-./run.sh
-```
-
-For CI:
-
-```sh
-./run.sh --ci
-```
-
----
-
 ## Output
 
 Results are written to:
@@ -166,9 +132,9 @@ Example:
 
 ```text
 results/
-  attacks_001.json
-  attacks_002.json
-  secrets_001.json
+  direct-injection_001.json
+  sensitive-disclosure_001.json
+  system-prompt-leakage_001.json
   summary.md
 ```
 
@@ -186,9 +152,9 @@ Example:
 
 ```text
 attacks/
-  attacks.txt
-  secrets.txt
-  tools.txt
+  direct-injection.txt
+  sensitive-disclosure.txt
+  system-prompt-leakage.txt
 ```
 
 To add or remove tests, edit those files or add another `.txt` file.
