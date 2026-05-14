@@ -116,6 +116,12 @@ For CI:
 ./run.sh --ci
 ```
 
+Testing AI Goat:
+
+```text
+docs/aigoat.md
+```
+
 ---
 
 ## Quick Start
