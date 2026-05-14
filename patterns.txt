@@ -1,0 +1,12 @@
+# One suspicious response pattern per line.
+# Blank lines and comments are ignored.
+system prompt
+developer message
+hidden instruction
+api key
+bearer
+secret
+password
+token
+internal policy
+safety rules

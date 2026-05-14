@@ -16,11 +16,11 @@ It is not a full security scanner. It is a smoke test.
 
 ## v0.1 — Shell Prototype
 
-Status: planned
+Status: implemented
 
 ### Features
 
-- Read prompts from `attacks.txt`
+- Read prompts from attack corpus files
 - Send each prompt to `PINJ_TARGET_URL`
 - Use bearer token from `PINJ_BEARER_TOKEN`
 - Store raw responses in `results/`
@@ -35,8 +35,9 @@ pinj/
   README.md
   AGENTS.md
   PLAN.md
-  attacks.txt
+  attacks/
   config.example.env
+  patterns.txt
   run.sh
   results/
 ```
@@ -59,31 +60,54 @@ Any JSON response.
 
 ---
 
-## v0.2 — Configurable Request Body
+## v0.2 — Attack Corpus Directory
 
-Make request body configurable.
+Status: implemented
 
-Possible approaches:
+- Support `attacks/` directory
+- Run every `*.txt` file inside it
+- Treat each file as a category
+- Keep one prompt per line
+- Include category in result filenames and summary
+- Keep `PINJ_ATTACKS_FILE` for single-file runs
+
+---
+
+## v0.3 — Configurable Request Body
+
+Status: implemented
+
+Make the request body field configurable:
 
 ```sh
 export PINJ_JSON_FIELD="message"
 ```
 
-or:
+Default request body:
 
-```sh
-export PINJ_REQUEST_TEMPLATE='{"message":"{{PROMPT}}"}'
+```json
+{
+  "message": "user prompt here"
+}
 ```
 
-Keep this simple.
+Example with `PINJ_JSON_FIELD=input`:
+
+```json
+{
+  "input": "user prompt here"
+}
+```
 
 ---
 
-## v0.3 — Better Detection
+## v0.4 — Better Detection
+
+Status: implemented
 
 Add configurable suspicious patterns.
 
-Possible file:
+Patterns file:
 
 ```text
 patterns.txt
@@ -102,9 +126,17 @@ password
 token
 ```
 
+- Read suspicious patterns from `patterns.txt`
+- Ignore blank lines and `#` comments
+- Match patterns case-insensitively
+- Include the matched pattern in `results/summary.md`
+- Allow overrides with `PINJ_PATTERNS_FILE`
+
 ---
 
-## v0.4 — CI Mode
+## v0.5 — CI Mode
+
+Status: implemented
 
 Add stable CI behavior.
 
@@ -118,36 +150,72 @@ CI output:
 - exit `1`: suspicious response found
 - exit `2`: configuration or endpoint error
 
+Endpoint errors include curl failures and non-2xx HTTP responses.
+
 ---
 
-## v0.5 — Rust CLI
+## v0.6 — Rust CLI
 
-Rewrite core as Rust CLI if the shell version proves useful.
+Status: removed
 
-Possible command:
+Keep `pinj` as a shell script while that stays useful.
+
+Rust is not needed unless the shell version becomes too hard to maintain.
+
+---
+
+## v0.6 — Request Body Templates
+
+Status: implemented
+
+Allow raw JSON request body templates with a `{{prompt}}` injection point.
 
 ```sh
-pinj run \
-  --target https://example.com/chat \
-  --attacks attacks.txt \
-  --out results/
+export PINJ_REQUEST_TEMPLATE_FILE="request.template.example.json"
 ```
 
-Possible crates:
+Example template:
 
-- `clap`
-- `reqwest`
-- `serde_json`
-- `anyhow`
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "{{prompt}}"
+    }
+  ]
+}
+```
+
+This takes precedence over `PINJ_JSON_FIELD`.
+
+---
+
+## v0.7 — Expanded Attack Corpus
+
+Status: implemented
+
+Expand attack prompts into categories inspired by OWASP LLM01 and related OWASP LLM Top 10 risks, plus MITRE ATLAS direct and indirect prompt injection concepts.
+
+Categories include:
+
+- direct injection
+- indirect injection
+- system prompt leakage
+- sensitive disclosure
+- tool and agency misuse
+- output handling
+- RAG content manipulation
+- decision manipulation
+- cost harvesting
+- multimodal hidden instructions
+- jailbreak roleplay
+- format bypass
 
 ---
 
 ## Future Ideas
 
-- OWASP LLM Top 10 prompt corpus
-- indirect prompt-injection tests
-- secret-leak tests
-- denial-of-wallet tests
 - tool-call permission tests
 - model-as-judge scoring
 - SARIF or JUnit XML export
