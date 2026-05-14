@@ -2,7 +2,13 @@
 
 This guide assumes AI Goat is already running locally.
 
-For AI Goat setup and project details, use the AI Goat project documentation. This guide only covers running `pinj` against an already-running AI Goat instance.
+For AI Goat setup and project details, use the AI Goat project documentation:
+
+```text
+https://github.com/AISecurityConsortium/AIGoat
+```
+
+This guide only covers running `pinj` against an already-running AI Goat instance.
 
 Default AI Goat URLs:
 
