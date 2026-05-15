@@ -19,7 +19,7 @@ else
   fail "run.sh syntax"
 fi
 
-if PINJ_TARGET_URL="" PINJ_BEARER_TOKEN="" ./run.sh >/tmp/pinj-test.out 2>/tmp/pinj-test.err; then
+if PINJ0R_TARGET_URL="" PINJ0R_BEARER_TOKEN="" ./run.sh >/tmp/pinj0r-test.out 2>/tmp/pinj0r-test.err; then
   fail "missing target should fail"
 else
   code=$?
@@ -27,7 +27,7 @@ else
   pass "missing target exits 2"
 fi
 
-if PINJ_TARGET_URL="http://example.test" PINJ_BEARER_TOKEN="x" PINJ_JSON_FIELD="bad field" ./run.sh >/tmp/pinj-test.out 2>/tmp/pinj-test.err; then
+if PINJ0R_TARGET_URL="http://example.test" PINJ0R_BEARER_TOKEN="x" PINJ0R_JSON_FIELD="bad field" ./run.sh >/tmp/pinj0r-test.out 2>/tmp/pinj0r-test.err; then
   fail "invalid JSON field should fail"
 else
   code=$?
@@ -38,7 +38,7 @@ fi
 template=$(mktemp)
 printf '{"message":"no marker"}\n' > "$template"
 
-if PINJ_TARGET_URL="http://example.test" PINJ_BEARER_TOKEN="x" PINJ_REQUEST_TEMPLATE_FILE="$template" ./run.sh >/tmp/pinj-test.out 2>/tmp/pinj-test.err; then
+if PINJ0R_TARGET_URL="http://example.test" PINJ0R_BEARER_TOKEN="x" PINJ0R_REQUEST_TEMPLATE_FILE="$template" ./run.sh >/tmp/pinj0r-test.out 2>/tmp/pinj0r-test.err; then
   rm -f "$template"
   fail "template without marker should fail"
 else
@@ -48,4 +48,4 @@ else
   pass "template without marker exits 2"
 fi
 
-rm -f /tmp/pinj-test.out /tmp/pinj-test.err
+rm -f /tmp/pinj0r-test.out /tmp/pinj0r-test.err

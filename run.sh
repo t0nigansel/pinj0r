@@ -21,28 +21,28 @@ while [ "$#" -gt 0 ]; do
   shift
 done
 
-ATTACKS_DIR="${PINJ_ATTACKS_DIR:-attacks}"
-ATTACKS_FILE="${PINJ_ATTACKS_FILE:-}"
-RESULTS_DIR="${PINJ_RESULTS_DIR:-results}"
-TARGET_URL="${PINJ_TARGET_URL:-}"
-BEARER_TOKEN="${PINJ_BEARER_TOKEN:-}"
-JSON_FIELD="${PINJ_JSON_FIELD:-message}"
-PATTERNS_FILE="${PINJ_PATTERNS_FILE:-patterns.txt}"
-REQUEST_TEMPLATE_FILE="${PINJ_REQUEST_TEMPLATE_FILE:-}"
+ATTACKS_DIR="${PINJ0R_ATTACKS_DIR:-attacks}"
+ATTACKS_FILE="${PINJ0R_ATTACKS_FILE:-}"
+RESULTS_DIR="${PINJ0R_RESULTS_DIR:-results}"
+TARGET_URL="${PINJ0R_TARGET_URL:-}"
+BEARER_TOKEN="${PINJ0R_BEARER_TOKEN:-}"
+JSON_FIELD="${PINJ0R_JSON_FIELD:-message}"
+PATTERNS_FILE="${PINJ0R_PATTERNS_FILE:-patterns.txt}"
+REQUEST_TEMPLATE_FILE="${PINJ0R_REQUEST_TEMPLATE_FILE:-}"
 
 if [ -z "$TARGET_URL" ]; then
-  echo "ERROR: PINJ_TARGET_URL is not set" >&2
+  echo "ERROR: PINJ0R_TARGET_URL is not set" >&2
   exit 2
 fi
 
 if [ -z "$BEARER_TOKEN" ]; then
-  echo "ERROR: PINJ_BEARER_TOKEN is not set" >&2
+  echo "ERROR: PINJ0R_BEARER_TOKEN is not set" >&2
   exit 2
 fi
 
 case "$JSON_FIELD" in
   *[!A-Za-z0-9_-]*|"")
-    echo "ERROR: PINJ_JSON_FIELD must contain only letters, numbers, underscores, or hyphens" >&2
+    echo "ERROR: PINJ0R_JSON_FIELD must contain only letters, numbers, underscores, or hyphens" >&2
     exit 2
     ;;
 esac
@@ -79,7 +79,7 @@ mkdir -p "$RESULTS_DIR"
 SUMMARY="$RESULTS_DIR/summary.md"
 : > "$SUMMARY"
 
-printf "# pinj summary\n\n" >> "$SUMMARY"
+printf "# Pinj0r summary\n\n" >> "$SUMMARY"
 printf 'Target: `%s`\n\n' "$TARGET_URL" >> "$SUMMARY"
 if [ -n "$REQUEST_TEMPLATE_FILE" ]; then
   printf 'Request template: `%s`\n\n' "$REQUEST_TEMPLATE_FILE" >> "$SUMMARY"

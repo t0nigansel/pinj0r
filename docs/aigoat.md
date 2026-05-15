@@ -1,4 +1,4 @@
-# Testing AI Goat with pinj
+# Testing AI Goat with Pinj0r
 
 This guide assumes AI Goat is already running locally.
 
@@ -8,7 +8,7 @@ For AI Goat setup and project details, use the AI Goat project documentation:
 https://github.com/AISecurityConsortium/AIGoat
 ```
 
-This guide only covers running `pinj` against an already-running AI Goat instance.
+This guide only covers running Pinj0r against an already-running AI Goat instance.
 
 Default AI Goat URLs:
 
@@ -42,7 +42,7 @@ printf '%s\n' "$TOKEN"
 
 ## 2. Use the AI Goat Request Template
 
-`pinj` includes an AI Goat chat template:
+Pinj0r includes an AI Goat chat template:
 
 ```text
 examples/aigoat-chat.template.json
@@ -69,22 +69,22 @@ curl -sS -X POST http://localhost:8000/api/workshop/challenges/1/start \
 Create a temporary focused corpus:
 
 ```sh
-rm -rf /tmp/pinj-aigoat-attacks
-mkdir -p /tmp/pinj-aigoat-attacks
+rm -rf /tmp/pinj0r-aigoat-attacks
+mkdir -p /tmp/pinj0r-aigoat-attacks
 cp attacks/direct-injection.txt \
    attacks/system-prompt-leakage.txt \
    attacks/sensitive-disclosure.txt \
-   /tmp/pinj-aigoat-attacks/
+   /tmp/pinj0r-aigoat-attacks/
 ```
 
-Run `pinj`:
+Run Pinj0r:
 
 ```sh
-PINJ_TARGET_URL=http://localhost:8000/api/challenges/1/chat \
-PINJ_BEARER_TOKEN="$TOKEN" \
-PINJ_ATTACKS_DIR=/tmp/pinj-aigoat-attacks \
-PINJ_RESULTS_DIR=results/aigoat-challenge-1 \
-PINJ_REQUEST_TEMPLATE_FILE=examples/aigoat-chat.template.json \
+PINJ0R_TARGET_URL=http://localhost:8000/api/challenges/1/chat \
+PINJ0R_BEARER_TOKEN="$TOKEN" \
+PINJ0R_ATTACKS_DIR=/tmp/pinj0r-aigoat-attacks \
+PINJ0R_RESULTS_DIR=results/aigoat-challenge-1 \
+PINJ0R_REQUEST_TEMPLATE_FILE=examples/aigoat-chat.template.json \
 ./run.sh --ci
 ```
 
@@ -125,11 +125,11 @@ rg -i 'system prompt|admin|secret|config.yml|aigoat.db|password|token' results/a
 To run all bundled attack categories against the same AI Goat endpoint:
 
 ```sh
-PINJ_TARGET_URL=http://localhost:8000/api/challenges/1/chat \
-PINJ_BEARER_TOKEN="$TOKEN" \
-PINJ_ATTACKS_DIR=attacks \
-PINJ_RESULTS_DIR=results/aigoat-full \
-PINJ_REQUEST_TEMPLATE_FILE=examples/aigoat-chat.template.json \
+PINJ0R_TARGET_URL=http://localhost:8000/api/challenges/1/chat \
+PINJ0R_BEARER_TOKEN="$TOKEN" \
+PINJ0R_ATTACKS_DIR=attacks \
+PINJ0R_RESULTS_DIR=results/aigoat-full \
+PINJ0R_REQUEST_TEMPLATE_FILE=examples/aigoat-chat.template.json \
 ./run.sh --ci
 ```
 
@@ -146,16 +146,16 @@ POST /api/chat/
 Run:
 
 ```sh
-PINJ_TARGET_URL=http://localhost:8000/api/chat/ \
-PINJ_BEARER_TOKEN="$TOKEN" \
-PINJ_ATTACKS_DIR=attacks \
-PINJ_RESULTS_DIR=results/aigoat-general-chat \
-PINJ_REQUEST_TEMPLATE_FILE=examples/aigoat-chat.template.json \
+PINJ0R_TARGET_URL=http://localhost:8000/api/chat/ \
+PINJ0R_BEARER_TOKEN="$TOKEN" \
+PINJ0R_ATTACKS_DIR=attacks \
+PINJ0R_RESULTS_DIR=results/aigoat-general-chat \
+PINJ0R_REQUEST_TEMPLATE_FILE=examples/aigoat-chat.template.json \
 ./run.sh --ci
 ```
 
 ## Notes
 
-- `pinj` is a baseline security check. It uses keyword matching and can produce false positives.
+- Pinj0r is a baseline security check. It uses keyword matching and can produce false positives.
 - AI Goat may leak useful details without marking its own workshop challenge as complete.
 - `results/` is ignored by git because raw responses may contain sensitive data.

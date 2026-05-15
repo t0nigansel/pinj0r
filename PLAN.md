@@ -1,12 +1,12 @@
 # PLAN.md
 
-Development plan for `pinj`.
+Development plan for Pinj0r.
 
 ## Goal
 
 Build a minimal prompt-injection baseline security check for LLM and agent endpoints.
 
-`pinj` should help answer one simple question:
+Pinj0r should help answer one simple question:
 
 > Does this endpoint fail obvious prompt-injection checks?
 
@@ -21,8 +21,8 @@ Status: implemented
 ### Features
 
 - Read prompts from attack corpus files
-- Send each prompt to `PINJ_TARGET_URL`
-- Use bearer token from `PINJ_BEARER_TOKEN`
+- Send each prompt to `PINJ0R_TARGET_URL`
+- Use bearer token from `PINJ0R_BEARER_TOKEN`
 - Store raw responses in `results/`
 - Generate `results/summary.md`
 - Flag obvious suspicious responses by keyword
@@ -31,7 +31,7 @@ Status: implemented
 ### Files
 
 ```text
-pinj/
+pinj0r/
   README.md
   AGENTS.md
   PLAN.md
@@ -56,7 +56,7 @@ Response:
 
 Any JSON response.
 
-`pinj` v0.1 stores the full raw response and does not require a fixed response schema.
+Pinj0r v0.1 stores the full raw response and does not require a fixed response schema.
 
 ---
 
@@ -69,7 +69,7 @@ Status: implemented
 - Treat each file as a category
 - Keep one prompt per line
 - Include category in result filenames and summary
-- Keep `PINJ_ATTACKS_FILE` for single-file runs
+- Keep `PINJ0R_ATTACKS_FILE` for single-file runs
 
 ---
 
@@ -80,7 +80,7 @@ Status: implemented
 Make the request body field configurable:
 
 ```sh
-export PINJ_JSON_FIELD="message"
+export PINJ0R_JSON_FIELD="message"
 ```
 
 Default request body:
@@ -91,7 +91,7 @@ Default request body:
 }
 ```
 
-Example with `PINJ_JSON_FIELD=input`:
+Example with `PINJ0R_JSON_FIELD=input`:
 
 ```json
 {
@@ -130,7 +130,7 @@ token
 - Ignore blank lines and `#` comments
 - Match patterns case-insensitively
 - Include the matched pattern in `results/summary.md`
-- Allow overrides with `PINJ_PATTERNS_FILE`
+- Allow overrides with `PINJ0R_PATTERNS_FILE`
 
 ---
 
@@ -158,7 +158,7 @@ Endpoint errors include curl failures and non-2xx HTTP responses.
 
 Status: removed
 
-Keep `pinj` as a shell script while that stays useful.
+Keep Pinj0r as a shell script while that stays useful.
 
 Rust is not needed unless the shell version becomes too hard to maintain.
 
@@ -171,7 +171,7 @@ Status: implemented
 Allow raw JSON request body templates with a `{{prompt}}` injection point.
 
 ```sh
-export PINJ_REQUEST_TEMPLATE_FILE="request.template.example.json"
+export PINJ0R_REQUEST_TEMPLATE_FILE="request.template.example.json"
 ```
 
 Example template:
@@ -187,7 +187,7 @@ Example template:
 }
 ```
 
-This takes precedence over `PINJ_JSON_FIELD`.
+This takes precedence over `PINJ0R_JSON_FIELD`.
 
 ---
 

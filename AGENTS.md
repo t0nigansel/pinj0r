@@ -1,10 +1,10 @@
 # AGENTS.md
 
-Guidance for AI coding agents working on `pinj`.
+Guidance for AI coding agents working on Pinj0r.
 
 ## Project
 
-`pinj` is a small Unix-style CLI tool for running prompt-injection baseline security checks against LLM or agent HTTP endpoints.
+Pinj0r is a small Unix-style CLI tool for running prompt-injection baseline security checks against LLM or agent HTTP endpoints.
 
 The first version is intentionally simple:
 
@@ -41,12 +41,12 @@ Avoid:
 
 ## Security Notes
 
-`pinj` must not include real secrets in examples.
+Pinj0r must not include real secrets in examples.
 
 Use environment variables for tokens:
 
 ```sh
-export PINJ_BEARER_TOKEN="..."
+export PINJ0R_BEARER_TOKEN="..."
 ```
 
 Never commit real test results from private systems.
@@ -95,8 +95,8 @@ Current:
 Possible future:
 
 ```sh
-pinj run
-pinj run --target https://example.com/chat
-pinj init
-pinj report
+pinj0r run
+pinj0r run --target https://example.com/chat
+pinj0r init
+pinj0r report
 ```

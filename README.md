@@ -1,14 +1,16 @@
-# pinj
+# Pinj0r
 
-![pinj banner](pinj-banner.png)
+![Pinj0r banner](pinj0r-banner.png)
 
-`pinj` is a tiny prompt-injection baseline security check for LLM and agent HTTP endpoints.
+`pinj0r` is a tiny prompt-injection baseline security check for LLM and agent HTTP endpoints.
 
 Current version: `0.1.0`
 
+Repository: [t0nigansel/pinj0r](https://github.com/t0nigansel/pinj0r)
+
 It sends a small set of hostile prompts to a target endpoint, stores the raw responses, and flags obvious suspicious behavior.
 
-`pinj` is intentionally simple.
+Pinj0r is intentionally simple.
 
 It does not prove that an agent is secure.
 
@@ -34,15 +36,15 @@ Failing these tests is a strong warning sign.
 
 ---
 
-## pinj and promptfoo
+## Pinj0r and promptfoo
 
-[promptfoo](https://github.com/promptfoo/promptfoo) is more comprehensive and the right fit for full evaluation pipelines. `pinj` is a curl-based baseline check for CI without Node or Python dependencies.
+[promptfoo](https://github.com/promptfoo/promptfoo) is more comprehensive and the right fit for full evaluation pipelines. `pinj0r` is a curl-based baseline check for CI without Node or Python dependencies.
 
 ---
 
 ## Current Scope
 
-`pinj` assumes:
+Pinj0r assumes:
 
 - HTTP POST endpoint
 - JSON request body
@@ -60,7 +62,7 @@ Default request body:
 To use a different prompt field, set:
 
 ```sh
-export PINJ_JSON_FIELD="input"
+export PINJ0R_JSON_FIELD="input"
 ```
 
 That sends:
@@ -76,7 +78,7 @@ That sends:
 ## Files
 
 ```text
-pinj/
+pinj0r/
   README.md
   AGENTS.md
   LICENSE
@@ -104,11 +106,11 @@ cp config.example.env .env
 Edit `.env`:
 
 ```sh
-export PINJ_TARGET_URL="https://example.com/chat"
-export PINJ_BEARER_TOKEN="replace-me"
-export PINJ_ATTACKS_DIR="attacks"
-export PINJ_JSON_FIELD="message"
-export PINJ_PATTERNS_FILE="patterns.txt"
+export PINJ0R_TARGET_URL="https://example.com/chat"
+export PINJ0R_BEARER_TOKEN="replace-me"
+export PINJ0R_ATTACKS_DIR="attacks"
+export PINJ0R_JSON_FIELD="message"
+export PINJ0R_PATTERNS_FILE="patterns.txt"
 ```
 
 Then run:
@@ -174,14 +176,14 @@ To add or remove tests, edit those files or add another `.txt` file.
 For compatibility with a single file, you can also set:
 
 ```sh
-export PINJ_ATTACKS_FILE="attacks/direct-injection.txt"
+export PINJ0R_ATTACKS_FILE="attacks/direct-injection.txt"
 ```
 
 ---
 
 ## Request Templates
 
-By default, `pinj` sends:
+By default, Pinj0r sends:
 
 ```json
 {
@@ -208,12 +210,12 @@ Example:
 Then set:
 
 ```sh
-export PINJ_REQUEST_TEMPLATE_FILE="request.template.json"
+export PINJ0R_REQUEST_TEMPLATE_FILE="request.template.json"
 ```
 
-When `PINJ_REQUEST_TEMPLATE_FILE` is set, it takes precedence over `PINJ_JSON_FIELD`.
+When `PINJ0R_REQUEST_TEMPLATE_FILE` is set, it takes precedence over `PINJ0R_JSON_FIELD`.
 
-`pinj` does not execute raw pasted curl commands. Keep method, URL, bearer token, and content type in the existing environment variables, and use the template file for the request body.
+Pinj0r does not execute raw pasted curl commands. Keep method, URL, bearer token, and content type in the existing environment variables, and use the template file for the request body.
 
 Example templates are available in:
 
@@ -224,7 +226,7 @@ examples/
 For example:
 
 ```sh
-export PINJ_REQUEST_TEMPLATE_FILE="examples/openai-chat.template.json"
+export PINJ0R_REQUEST_TEMPLATE_FILE="examples/openai-chat.template.json"
 ```
 
 ---
@@ -252,7 +254,7 @@ token
 To use a different patterns file, set:
 
 ```sh
-export PINJ_PATTERNS_FILE="my-patterns.txt"
+export PINJ0R_PATTERNS_FILE="my-patterns.txt"
 ```
 
 ---
@@ -281,7 +283,7 @@ Run the shell checks with:
 
 ## Limitations
 
-`pinj` v0.1 uses naive keyword matching.
+Pinj0r v0.1 uses naive keyword matching.
 
 It may produce false positives.
 
