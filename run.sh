@@ -110,9 +110,12 @@ match_pattern() {
 }
 
 json_escape() {
-  printf '%s' "$1" \
-    | sed 's/\\/\\\\/g' \
-    | sed 's/"/\\"/g'
+  if [ "$#" -gt 0 ]; then
+    printf '%s' "$1"
+  else
+    cat
+  fi \
+    | awk '{gsub(/\\/, "\\\\"); gsub(/"/, "\\\""); gsub(/\t/, "\\t"); gsub(/\r/, "\\r"); if (NR>1) printf "\\n"; printf "%s", $0}'
 }
 
 sed_replacement_escape() {
@@ -172,6 +175,9 @@ run_attacks_file() {
       endpoint_error=1
       : > "$out"
     fi
+
+    response_escaped=$(json_escape < "$out")
+    printf '{"prompt":"%s","response":"%s","status":"%s"}\n' "$escaped_prompt" "$response_escaped" "$status" > "$out"
 
     printf "## %s %s - %s\n\n" "$category" "$num" "$status" >> "$SUMMARY"
     printf '**Source:** `%s`\n\n' "$attack_file" >> "$SUMMARY"
